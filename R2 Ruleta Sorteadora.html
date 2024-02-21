@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ruleta</title>
+
+
+<style>
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Fondo gris oscuro */
+body {
+  background-color: #8c8c8c;
+}
+
+/* Botón verde fluorescente con glow rosa fluorescente */
+button {
+  background-color: #39ff14;
+  color: #1c1c1c;
+  border: none;
+  border-radius: 1px;
+        width:132px;
+        height:48px;
+
+
+   	font-size:15px;
+        font-family:Verdana,Helvetica;
+        
+        color:green;
+	border:0px;
+
+
+  }
+
+button:hover {
+  box-shadow: 0 0 10px #ff007f;
+}
+
+
+
+
+
+/* Textarea fondo violeta claro y glow amarillo */
+textarea {
+background-color: #646464;
+border: none;
+border-radius: 5px;
+
+
+}
+
+
+textarea:hover {
+  box-shadow: 0 0 10px #ffff00;
+}
+
+
+
+
+
+div {
+
+        
+        color:white;
+	
+
+
+  }
+
+
+
+
+
+
+
+
+
+</style>
+
+	<script>
+		var options = [];
+
+		function addOption() {
+			var textarea = document.getElementById("options");
+			var lines = textarea.value.split('\n');
+			for (var i = 0; i < lines.length; i++) {
+				if (lines[i].trim() !== "") {
+					options.push(lines[i].trim());
+					var allOptionsTextarea = document.getElementById("all-options");
+					allOptionsTextarea.value += lines[i].trim() + '\n';
+				}
+			}
+			textarea.value = "";
+		}
+
+		function spin() {
+			var result = document.getElementById("result");
+			var allOptionsTextarea = document.getElementById("all-options");
+			if (options.length > 0) {
+				var index = Math.floor(Math.random() * options.length);
+				result.innerHTML = options[index];
+				allOptionsTextarea.value = allOptionsTextarea.value.replace(options[index], '');
+				options.splice(index, 1);
+			} else {
+				result.innerHTML = "Ya no quedan opciones";
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Ruleta</h1>
+	<textarea id="options" rows="10" cols="50"></textarea><br><br>
+	<button onclick="addOption()">Agregar</button>
+	<button onclick="spin()">Sortear</button><br>
+	
+	<h2>Todas las opciones</h2>
+	<textarea id="all-options" rows="10" cols="50" readonly></textarea>
+<h1>
+<div id="result"></div>
+</h1>
+</body>
+</html>
